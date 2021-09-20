@@ -11,6 +11,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (findViewById(R.id.contenedor_pequeno)!=null) {
+
+            getSupportFragmentManager().beginTransaction().add(
+                    R.id.contenedor_pequeno,
+                    SelectorFragment.class, null).commit();
+
+        }
+
         
     }
 }
