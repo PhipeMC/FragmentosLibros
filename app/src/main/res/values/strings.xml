@@ -5,4 +5,13 @@
     <string name="fragmento_detalle_title">
         This es Fragment Detail</string>
 
+    <string-array name="generos">
+        <item>Ciencia ficcion</item>
+        <item>Terror</item>
+        <item>Comedia</item>
+        <item>Romantica</item>
+    </string-array>
+
+
+
 </resources>

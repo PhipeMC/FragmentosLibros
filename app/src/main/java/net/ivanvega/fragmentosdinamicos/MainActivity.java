@@ -11,9 +11,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (findViewById(R.id.contenedor_pequeno)!=null) {
+        if (findViewById(R.id.contenedor_pequeno)!=null
+        ) {
 
-            getSupportFragmentManager().beginTransaction().add(
+            getSupportFragmentManager().beginTransaction().
+                    setReorderingAllowed(true)
+            .add(
                     R.id.contenedor_pequeno,
                     SelectorFragment.class, null).commit();
 

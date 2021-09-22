@@ -65,9 +65,9 @@ public class SelectorFragment extends Fragment {
                 container,
                 false);
 
-        TextView   txtLbl = layout.findViewById(R.id.lblSF);
-
-        txtLbl.setText("Fragmento Selector En ejecucion");
+//        TextView   txtLbl = layout.findViewById(R.id.lblSF);
+//
+//        txtLbl.setText("Fragmento Selector En ejecucion");
 
 
         return layout;

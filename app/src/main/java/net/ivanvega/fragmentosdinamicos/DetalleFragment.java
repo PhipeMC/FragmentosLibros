@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +62,25 @@ public class DetalleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detalle_layout, container, false);
+        View layout =
+                inflater.inflate(R.layout.fragment_detalle_layout,
+                        container, false);
+
+        Spinner spinner =
+                layout.findViewById(R.id.spnGeneros);
+
+        String[] generos
+                =  getResources().getStringArray(R.array.generos);
+
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter(getActivity(),
+                        android.R.layout.simple_list_item_1,
+                        android.R.id.text1, generos
+                        );
+
+        spinner.setAdapter(adapter);
+
+
+        return layout;
     }
 }
