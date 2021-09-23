@@ -43,7 +43,7 @@ public class Libro {
         this.genero = genero;
     }
 
-    public Libro( String titulo, String autor, int recursoImagen, S            tring url, String genero,Boolean novedad, Boolean leido,) {
+    public Libro( String titulo, String autor, int recursoImagen, String url, String genero,Boolean novedad, Boolean leido) {
         this.novedad = novedad;
         this.leido = leido;
         this.titulo = titulo;
