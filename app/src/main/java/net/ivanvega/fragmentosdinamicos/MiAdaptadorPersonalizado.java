@@ -1,11 +1,17 @@
 package net.ivanvega.fragmentosdinamicos;
 
 import android.content.Context;
+import android.media.Image;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 import java.util.Vector;
 
@@ -27,24 +33,61 @@ public class MiAdaptadorPersonalizado
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+//        LayoutInflater inflater =
+//                (LayoutInflater)
+//                        contexto.getSystemService(
+//                                Context.LAYOUT_INFLATER_SERVICE);
+//
+//        View v = inflater.inflate(R.layout.item_selector_layout,
+//                null);
 
-        return null;
+
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_selector_layout,
+                        parent, false);
+
+        return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder,
+                                 int position) {
+
+        Libro libro = libros.elementAt(position);
+
+        holder.getTitulo().setText(
+                libro.getTitulo()     );
+        holder.getPortada().setImageResource(
+                libro.getRecursoImagen()
+        );
 
     }
 
     @Override
     public int getItemCount() {
+
         return libros.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView portada;
+        private final TextView titulo;
+
+        public ImageView getPortada() {
+            return portada;
+        }
+
+        public TextView getTitulo() {
+            return titulo;
+        }
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            portada =
+                    itemView.findViewById(R.id.portada);
+            titulo = itemView.findViewById(R.id.titulo);
+
         }
     }
 }

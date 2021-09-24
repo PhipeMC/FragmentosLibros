@@ -6,6 +6,7 @@
     tools:context=".SelectorFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewLibros"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
