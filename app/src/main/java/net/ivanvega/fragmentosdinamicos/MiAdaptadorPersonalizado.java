@@ -21,12 +21,17 @@ public class MiAdaptadorPersonalizado
 
     private final Vector<Libro> libros;
     private final Context contexto;
+    private View.OnClickListener onClickLister;
 
     public  MiAdaptadorPersonalizado(Context ctx,
                                      Vector<Libro> libros){
         this.libros = libros;
         this.contexto = ctx;
 
+    }
+
+    public void setOnClickLister(View.OnClickListener onClickLister){
+        this.onClickLister = onClickLister;
     }
 
     @NonNull
@@ -45,6 +50,8 @@ public class MiAdaptadorPersonalizado
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_selector_layout,
                         parent, false);
+
+        v.setOnClickListener(this.onClickLister);
 
         return new ViewHolder(v);
     }

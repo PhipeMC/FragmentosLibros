@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,6 +83,19 @@ public class SelectorFragment extends Fragment {
         new MiAdaptadorPersonalizado(getActivity() ,
                 Libro.ejemplosLibros()
                 )        ;
+
+        miAdaptadorPersonalizado.setOnClickLister(view ->
+            {
+                int pos =
+                        recyclerViewLibros.
+                                getChildAdapterPosition(view);
+                Toast.makeText(getActivity(),
+                        "ELement at selected" + pos,
+                        Toast.LENGTH_LONG).show();
+
+                ((MainActivity)getActivity()).mostrarDetalle(pos);
+            }
+        );
 
         RecyclerView.LayoutManager layoutManager
                 = new GridLayoutManager(getActivity(),
