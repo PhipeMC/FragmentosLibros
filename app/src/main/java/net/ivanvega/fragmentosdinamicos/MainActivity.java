@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (findViewById(R.id.contenedor_pequeno) != null &&
                 getSupportFragmentManager()
-                        .findFragmentById(R.id.selector_fragment) == null
+                        .findFragmentById(R.id.contenedor_pequeno) == null
         ) {
 
             getSupportFragmentManager().beginTransaction().
