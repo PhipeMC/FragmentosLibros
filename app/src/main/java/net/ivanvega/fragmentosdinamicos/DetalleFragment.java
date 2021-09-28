@@ -73,19 +73,19 @@ public class DetalleFragment extends Fragment {
                 inflater.inflate(R.layout.fragment_detalle_layout,
                         container, false);
 
-//        Spinner spinner =
-//                layout.findViewById(R.id.spnGeneros);
-//
-//        String[] generos
-//                =  getResources().getStringArray(R.array.generos);
-//
-//        ArrayAdapter<String> adapter =
-//                new ArrayAdapter(getActivity(),
-//                        android.R.layout.simple_list_item_1,
-//                        android.R.id.text1, generos
-//                        );
-//
-//        spinner.setAdapter(adapter);
+        Spinner spinner =
+                layout.findViewById(R.id.spnGeneros);
+
+        String[] generos
+                =  getResources().getStringArray(R.array.generos);
+
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter(getActivity(),
+                        android.R.layout.simple_list_item_1,
+                        android.R.id.text1, generos
+                        );
+
+        spinner.setAdapter(adapter);
 
           Bundle args = getArguments();
 
@@ -112,5 +112,11 @@ public class DetalleFragment extends Fragment {
         lblAutor.setText(libro.getAutor());
         imvPortada.setImageResource(libro.getRecursoImagen());
 
+    }
+
+
+
+    public void setInfoLibro(int pos) {
+        this.setInfoLibro(pos,getView()    );
     }
 }

@@ -1,7 +1,9 @@
 package net.ivanvega.fragmentosdinamicos;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +32,7 @@ public class SelectorFragment extends Fragment {
     private String mParam2;
 
     RecyclerView recyclerViewLibros ;
+    private Context contexto;
 
     public SelectorFragment() {
         // Required empty public constructor
@@ -63,6 +66,16 @@ public class SelectorFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if(context instanceof MainActivity){
+            this.contexto = (MainActivity)context;
+        }
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -93,7 +106,7 @@ public class SelectorFragment extends Fragment {
                         "ELement at selected" + pos,
                         Toast.LENGTH_LONG).show();
 
-                ((MainActivity)getActivity()).mostrarDetalle(pos);
+                ((MainActivity)this.contexto).mostrarDetalle(pos);
             }
         );
 

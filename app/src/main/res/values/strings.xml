@@ -1,15 +1,17 @@
 <resources>
-    <string name="app_name">FragmentosDinamicos</string>
+    <string name="app_name">Freagments DInamics (Ingles)</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fragmento_detalle_title">
         This es Fragment Detail</string>
 
+
+
     <string-array name="generos">
-        <item>Ciencia ficcion</item>
+        <item>Fiction</item>
         <item>Terror</item>
-        <item>Comedia</item>
-        <item>Romantica</item>
+        <item>Comedy</item>
+        <item>Romance</item>
     </string-array>
 
 

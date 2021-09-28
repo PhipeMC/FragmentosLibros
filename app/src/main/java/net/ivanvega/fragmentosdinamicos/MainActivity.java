@@ -1,8 +1,8 @@
 package net.ivanvega.fragmentosdinamicos;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,26 +11,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (findViewById(R.id.contenedor_pequeno)!=null
+        if (findViewById(R.id.contenedor_pequeno) != null &&
+                getSupportFragmentManager()
+                        .findFragmentById(R.id.selector_fragment) == null
         ) {
 
             getSupportFragmentManager().beginTransaction().
                     setReorderingAllowed(true)
-            .add(
-                    R.id.contenedor_pequeno,
-                    SelectorFragment.class, null).commit();
+                    .add(
+                            R.id.contenedor_pequeno,
+                            SelectorFragment.class, null).commit();
 
         }
 
-        
+
     }
 
     public void mostrarDetalle(int pos) {
+        DetalleFragment detalleFragment =
+                (DetalleFragment) getSupportFragmentManager().
+                        findFragmentById(R.id.detalle_fragment);
+        if (detalleFragment != null) {
+            detalleFragment.setInfoLibro(pos);
+        } else {
 
-        if (findViewById(R.id.contenedor_pequeno)!=null
-        ) {
-
-            DetalleFragment detalleFragment =
+            detalleFragment =
                     new DetalleFragment();
             Bundle bundle = new Bundle();
 
@@ -40,22 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
             detalleFragment.setArguments(
                     bundle
-                    );
+            );
 
             getSupportFragmentManager().beginTransaction().
                     setReorderingAllowed(true)
-                    .replace(R.id.contenedor_pequeno,detalleFragment)
+                    .replace(R.id.contenedor_pequeno, detalleFragment)
+                    .addToBackStack(null)
                     .commit();
-
-
         }
-
-        /*
-
-        DetalleFragment getSupportFragmentManager().
-                findFragmentById(R.id.detalle_fragment)
-                */
-
 
     }
 }
