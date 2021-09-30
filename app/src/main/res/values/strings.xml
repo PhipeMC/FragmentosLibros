@@ -14,6 +14,11 @@
         <item>Romance</item>
     </string-array>
 
+    <string-array name="mnuContextItemSelector">
+            <item >Shared</item>
+            <item>Add</item>
+            <item>Delete</item>
+    </string-array>
 
 
 </resources>

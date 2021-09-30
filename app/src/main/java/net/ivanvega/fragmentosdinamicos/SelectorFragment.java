@@ -1,9 +1,12 @@
 package net.ivanvega.fragmentosdinamicos;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +33,8 @@ public class SelectorFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    String[] menuContextItem ;
 
     RecyclerView recyclerViewLibros ;
     private Context contexto;
@@ -109,6 +114,63 @@ public class SelectorFragment extends Fragment {
                 ((MainActivity)this.contexto).mostrarDetalle(pos);
             }
         );
+
+        miAdaptadorPersonalizado.
+                setOnLongClickItemListener(view -> {
+                    menuContextItem =
+                            getResources()
+                                    .getStringArray(R.array.mnuContextItemSelector);
+
+                    int posLibro = recyclerViewLibros.getChildAdapterPosition(view);
+
+
+                    AlertDialog.Builder   dialog =
+                            new AlertDialog.Builder(
+                                    SelectorFragment.this.contexto)
+                            .setTitle("Audio Libros")
+                            .setItems(menuContextItem,
+                                    new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    switch (i){
+                                        case 0:
+                                            Intent intent = new Intent(Intent.ACTION_SEND);
+                                            intent.putExtra(Intent.EXTRA_SUBJECT,
+                                                    Libro.ejemplosLibros()
+                                                            .elementAt(posLibro).getTitulo());
+
+                                            intent.putExtra(Intent.EXTRA_TEXT,
+                                                    Libro.ejemplosLibros()
+                                                            .elementAt(posLibro).getUrl());
+
+                                            startActivity(intent);
+
+                                            break;
+                                        case 1:
+
+                                            Libro.ejemplosLibros().add(
+                                                    Libro.ejemplosLibros().get(posLibro)
+                                            );
+                                            miAdaptadorPersonalizado.notifyDataSetChanged();
+
+                                            break;
+
+                                        case 2:
+                                            Libro.ejemplosLibros().remove(posLibro);
+                                            miAdaptadorPersonalizado.notifyDataSetChanged();
+                                            break;
+
+                                    }
+
+                                }
+                            });
+
+                            dialog.create().show();
+
+                    return true;
+                });
+
+
 
         RecyclerView.LayoutManager layoutManager
                 = new GridLayoutManager(getActivity(),
