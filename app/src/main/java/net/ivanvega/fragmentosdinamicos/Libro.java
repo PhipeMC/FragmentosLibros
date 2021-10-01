@@ -3,6 +3,21 @@ package net.ivanvega.fragmentosdinamicos;
 import java.util.Vector;
 
 public class Libro {
+
+    static Vector<Libro> libros = new Vector<Libro>();
+    static{
+        final String SERVIDOR =
+                "http://www.dcomg.upv.es/~jtomas/android/audiolibros/";
+
+        libros.add(new Libro("Kappa", "Akutagawa", R.drawable.kappa, SERVIDOR + "kappa.mp3", Libro.G_S_XIX, false, false));
+        libros.add(new Libro("Avecilla", "Alas Clarín, Leopoldo", R.drawable.avecilla, SERVIDOR + "avecilla.mp3", Libro.G_S_XIX, true, false));
+        libros.add(new Libro("Divina Comedia", "Dante", R.drawable.divina_comedia, SERVIDOR + "divina_comedia.mp3", Libro.G_EPICO, true, false));
+        libros.add(new Libro("Viejo Pancho, El", "Alonso y Trelles, José", R.drawable.viejo_pancho, SERVIDOR + "viejo_pancho.mp3", Libro.G_S_XIX, true, true));
+        libros.add(new Libro("Canción de Rolando", "Anónimo", R.drawable.cancion_rolando, SERVIDOR + "cancion_rolando.mp3", Libro.G_EPICO, false, true));
+        libros.add(new Libro("Matrimonio de sabuesos", "Agata Christie", R.drawable.matrim_sabuesos, SERVIDOR + "matrim_sabuesos.mp3", Libro.G_SUSPENSE, false, true));
+        libros.add(new Libro("La iliada", "Homero", R.drawable.la_iliada, SERVIDOR + "la_iliada.mp3", Libro.G_EPICO, true, false));
+    }
+
     public String getTitulo() {
         return titulo;
     }
@@ -56,24 +71,7 @@ public class Libro {
     }
 
     public static Vector<Libro> ejemplosLibros(){
-
-        Vector<Libro> libros = new Vector<Libro>();
-
-        final String SERVIDOR =
-                "http://www.dcomg.upv.es/~jtomas/android/audiolibros/";
-
-        libros.add(new Libro("Kappa", "Akutagawa", R.drawable.kappa, SERVIDOR + "kappa.mp3", Libro.G_S_XIX, false, false));
-        libros.add(new Libro("Avecilla", "Alas Clarín, Leopoldo", R.drawable.avecilla, SERVIDOR + "avecilla.mp3", Libro.G_S_XIX, true, false));
-        libros.add(new Libro("Divina Comedia", "Dante", R.drawable.divina_comedia, SERVIDOR + "divina_comedia.mp3", Libro.G_EPICO, true, false));
-        libros.add(new Libro("Viejo Pancho, El", "Alonso y Trelles, José", R.drawable.viejo_pancho, SERVIDOR + "viejo_pancho.mp3", Libro.G_S_XIX, true, true));
-        libros.add(new Libro("Canción de Rolando", "Anónimo", R.drawable.cancion_rolando, SERVIDOR + "cancion_rolando.mp3", Libro.G_EPICO, false, true));
-        libros.add(new Libro("Matrimonio de sabuesos", "Agata Christie", R.drawable.matrim_sabuesos, SERVIDOR + "matrim_sabuesos.mp3", Libro.G_SUSPENSE, false, true));
-        libros.add(new Libro("La iliada", "Homero", R.drawable.la_iliada, SERVIDOR + "la_iliada.mp3", Libro.G_EPICO, true, false));
-
         return libros;
-
-
-
     }
 
     public Boolean getNovedad() {

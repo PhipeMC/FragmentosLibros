@@ -1,24 +1,35 @@
 package net.ivanvega.fragmentosdinamicos;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DetalleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DetalleFragment extends Fragment {
+public class DetalleFragment extends Fragment
+    implements MediaPlayer.OnPreparedListener,
+        MediaController.MediaPlayerControl,
+        View.OnTouchListener
+
+{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,6 +44,9 @@ public class DetalleFragment extends Fragment {
     private TextView lblTitulo;
     private TextView lblAutor;
     private ImageView imvPortada;
+
+    MediaPlayer mediaPlayer;
+    MediaController mediaController;
 
     public DetalleFragment() {
         // Required empty public constructor
@@ -73,6 +87,8 @@ public class DetalleFragment extends Fragment {
                 inflater.inflate(R.layout.fragment_detalle_layout,
                         container, false);
 
+        layout.setOnTouchListener(this);
+
         Spinner spinner =
                 layout.findViewById(R.id.spnGeneros);
 
@@ -112,11 +128,100 @@ public class DetalleFragment extends Fragment {
         lblAutor.setText(libro.getAutor());
         imvPortada.setImageResource(libro.getRecursoImagen());
 
+        if( mediaPlayer== null){
+            mediaPlayer = new MediaPlayer();
+            mediaController = new MediaController(getActivity());
+            mediaPlayer.setOnPreparedListener(this);
+            try {
+                mediaPlayer.setDataSource(getActivity(),
+                        Uri.parse(libro.getUrl()));
+                mediaPlayer.prepareAsync();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+
     }
 
 
 
     public void setInfoLibro(int pos) {
+
         this.setInfoLibro(pos,getView()    );
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer mediaPlayer) {
+        mediaPlayer.start();
+        mediaController.setMediaPlayer(this);
+        mediaController.setAnchorView(
+                getView().findViewById(R.id.fragment_detalle_layout_root));
+        mediaController.setEnabled(true);
+        mediaController.show();
+
+
+    }
+
+    @Override
+    public void start() {
+        mediaPlayer.start();
+    }
+
+    @Override
+    public void pause() {
+        mediaPlayer.pause();
+    }
+
+    @Override
+    public int getDuration() {
+        return 0;
+    }
+
+    @Override
+    public int getCurrentPosition() {
+        return 0;
+    }
+
+    @Override
+    public void seekTo(int i) {
+
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return false;
+    }
+
+    @Override
+    public int getBufferPercentage() {
+        return 0;
+    }
+
+    @Override
+    public boolean canPause() {
+        return false;
+    }
+
+    @Override
+    public boolean canSeekBackward() {
+        return false;
+    }
+
+    @Override
+    public boolean canSeekForward() {
+        return false;
+    }
+
+    @Override
+    public int getAudioSessionId() {
+        return 0;
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        mediaController.show();
+        return false;
     }
 }

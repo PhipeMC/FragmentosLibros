@@ -126,15 +126,18 @@ public class SelectorFragment extends Fragment {
 
                     AlertDialog.Builder   dialog =
                             new AlertDialog.Builder(
-                                    SelectorFragment.this.contexto)
+                                    contexto)
                             .setTitle("Audio Libros")
                             .setItems(menuContextItem,
                                     new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(getContext(), ""+ i,
+                                            Toast.LENGTH_LONG).show();
                                     switch (i){
                                         case 0:
                                             Intent intent = new Intent(Intent.ACTION_SEND);
+                                            intent.setType("text/plain");
                                             intent.putExtra(Intent.EXTRA_SUBJECT,
                                                     Libro.ejemplosLibros()
                                                             .elementAt(posLibro).getTitulo());
@@ -151,15 +154,15 @@ public class SelectorFragment extends Fragment {
                                             Libro.ejemplosLibros().add(
                                                     Libro.ejemplosLibros().get(posLibro)
                                             );
-                                            miAdaptadorPersonalizado.notifyDataSetChanged();
-
+                                            miAdaptadorPersonalizado
+                                                    .notifyItemInserted(
+                                                            Libro.ejemplosLibros().size()-1);
                                             break;
 
                                         case 2:
                                             Libro.ejemplosLibros().remove(posLibro);
-                                            miAdaptadorPersonalizado.notifyDataSetChanged();
+                                            miAdaptadorPersonalizado.notifyItemRemoved(posLibro);
                                             break;
-
                                     }
 
                                 }
@@ -167,7 +170,7 @@ public class SelectorFragment extends Fragment {
 
                             dialog.create().show();
 
-                    return true;
+                    return false;
                 });
 
 
