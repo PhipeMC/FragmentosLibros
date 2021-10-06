@@ -19,7 +19,7 @@ public class MiAdaptadorPersonalizado
         extends RecyclerView.Adapter<MiAdaptadorPersonalizado.ViewHolder> {
 
 
-    private final Vector<Libro> libros;
+    Vector<Libro> libros;
     private final Context contexto;
     private View.OnClickListener onClickLister;
     private View.OnLongClickListener onLongClickItemListener;
@@ -28,14 +28,13 @@ public class MiAdaptadorPersonalizado
         this.onLongClickItemListener = onLongClickItemListener;
     }
 
-    public  MiAdaptadorPersonalizado(Context ctx,
-                                     Vector<Libro> libros){
+    public MiAdaptadorPersonalizado(Context ctx, Vector<Libro> libros) {
         this.libros = libros;
         this.contexto = ctx;
 
     }
 
-    public void setOnClickLister(View.OnClickListener onClickLister){
+    public void setOnClickLister(View.OnClickListener onClickLister) {
         this.onClickLister = onClickLister;
     }
 
@@ -52,9 +51,7 @@ public class MiAdaptadorPersonalizado
 //                null);
 
 
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_selector_layout,
-                        parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_selector_layout, parent, false);
 
         v.setOnClickListener(this.onClickLister);
         v.setOnLongClickListener(this.onLongClickItemListener);
@@ -63,15 +60,11 @@ public class MiAdaptadorPersonalizado
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder,
-                                 int position) {
-
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Libro libro = libros.elementAt(position);
 
-        holder.getTitulo().setText(
-                libro.getTitulo()     );
-        holder.getPortada().setImageResource(
-                libro.getRecursoImagen()
+        holder.getTitulo().setText(libro.getTitulo());
+        holder.getPortada().setImageResource(libro.getRecursoImagen()
         );
 
     }
@@ -97,10 +90,8 @@ public class MiAdaptadorPersonalizado
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            portada =
-                    itemView.findViewById(R.id.portada);
+            portada = itemView.findViewById(R.id.portada);
             titulo = itemView.findViewById(R.id.titulo);
-
         }
     }
 }

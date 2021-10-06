@@ -6,7 +6,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +26,7 @@ import java.io.IOException;
  * Use the {@link DetalleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DetalleFragment extends Fragment
-    implements MediaPlayer.OnPreparedListener,
-        MediaController.MediaPlayerControl,
-        View.OnTouchListener
-
-{
-
+public class DetalleFragment extends Fragment implements MediaPlayer.OnPreparedListener, MediaController.MediaPlayerControl, View.OnTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -80,39 +76,28 @@ public class DetalleFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View layout =
-                inflater.inflate(R.layout.fragment_detalle_layout,
-                        container, false);
+        View layout = inflater.inflate(R.layout.fragment_detalle_layout, container, false);
 
         layout.setOnTouchListener(this);
 
-        Spinner spinner =
-                layout.findViewById(R.id.spnGeneros);
+        Spinner spinner = layout.findViewById(R.id.spnGeneros);
 
-        String[] generos
-                =  getResources().getStringArray(R.array.generos);
+        String[] generos = getResources().getStringArray(R.array.generos);
 
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter(getActivity(),
-                        android.R.layout.simple_list_item_1,
-                        android.R.id.text1, generos
-                        );
+        ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, generos);
 
         spinner.setAdapter(adapter);
 
-          Bundle args = getArguments();
+        Bundle args = getArguments();
 
-          if(args != null){
-               int idLibro =
-                       args.getInt(DetalleFragment.ARG_INDEX_LIBRO);
-               setInfoLibro(idLibro,layout );
-          }else{
-              setInfoLibro(0, layout);
-          }
-
+        if (args != null) {
+            int idLibro = args.getInt(DetalleFragment.ARG_INDEX_LIBRO);
+            setInfoLibro(idLibro, layout);
+        } else {
+            setInfoLibro(0, layout);
+        }
 
         return layout;
     }
@@ -128,40 +113,34 @@ public class DetalleFragment extends Fragment
         lblAutor.setText(libro.getAutor());
         imvPortada.setImageResource(libro.getRecursoImagen());
 
-        if( mediaPlayer== null){
+        if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
             mediaController = new MediaController(getActivity());
             mediaPlayer.setOnPreparedListener(this);
             try {
-                mediaPlayer.setDataSource(getActivity(),
-                        Uri.parse(libro.getUrl()));
+                mediaPlayer.setDataSource(getActivity(), Uri.parse(libro.getUrl()));
                 mediaPlayer.prepareAsync();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
-
-
     }
 
 
-
     public void setInfoLibro(int pos) {
-
-        this.setInfoLibro(pos,getView()    );
+        this.setInfoLibro(pos, getView());
     }
 
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
+        Log.d("Audiolibros", "Estamos en onPrepared de MediaPlayer");
         mediaPlayer.start();
         mediaController.setMediaPlayer(this);
-        mediaController.setAnchorView(
-                getView().findViewById(R.id.fragment_detalle_layout_root));
+        mediaController.setAnchorView(getView().findViewById(R.id.fragment_detalle_layout_root));
+        mediaController.setPadding(0, 0, 0, 110);
         mediaController.setEnabled(true);
         mediaController.show();
-
-
+        mediaPlayer.start();
     }
 
     @Override
@@ -176,22 +155,22 @@ public class DetalleFragment extends Fragment
 
     @Override
     public int getDuration() {
-        return 0;
+        return mediaPlayer.getDuration();
     }
 
     @Override
     public int getCurrentPosition() {
-        return 0;
+        return mediaPlayer.getCurrentPosition();
     }
 
     @Override
     public void seekTo(int i) {
-
+        mediaPlayer.seekTo(i);
     }
 
     @Override
     public boolean isPlaying() {
-        return false;
+        return  mediaPlayer.isPlaying();
     }
 
     @Override
@@ -201,17 +180,17 @@ public class DetalleFragment extends Fragment
 
     @Override
     public boolean canPause() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canSeekBackward() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canSeekForward() {
-        return false;
+        return true;
     }
 
     @Override
@@ -223,5 +202,12 @@ public class DetalleFragment extends Fragment
     public boolean onTouch(View view, MotionEvent motionEvent) {
         mediaController.show();
         return false;
+    }
+
+    @Override
+    public void onStop() {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        super.onStop();
     }
 }

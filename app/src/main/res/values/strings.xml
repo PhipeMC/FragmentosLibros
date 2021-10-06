@@ -6,7 +6,6 @@
         This es Fragment Detail</string>
 
 
-
     <string-array name="generos">
         <item>Fiction</item>
         <item>Terror</item>
@@ -15,10 +14,19 @@
     </string-array>
 
     <string-array name="mnuContextItemSelector">
-            <item >Shared</item>
-            <item>Add</item>
-            <item>Delete</item>
+        <item>Shared</item>
+        <item>Add</item>
+        <item>Delete</item>
     </string-array>
 
+    <string name="action_bar_preferences">Preferences</string>
+    <string name="action_bar_last">Last read</string>
+    <string name="action_bar_search">Search</string>
+    <string name="action_bar_about">About</string>
+    <string name="float_button">Delete</string>
+    <string name="delete_confirm">Are you sure?</string>
+    <string name="delete_action_yes">Yes</string>
+    <string name="insert_success">Successfully inserted</string>
+    <string name="action_ok">OK</string>
 
 </resources>

@@ -12,6 +12,14 @@
         <item>Romantica</item>
     </string-array>
 
-
+    <string name="action_bar_preferences">Preferencias</string>
+    <string name="action_bar_last">Último leido</string>
+    <string name="action_bar_search">Buscar</string>
+    <string name="action_bar_about">Acerca de</string>
+    <string name="float_button">Eliminar</string>
+    <string name="delete_confirm">¿Estas seguro?</string>
+    <string name="delete_action_yes">Si</string>
+    <string name="insert_success">Insertado con éxito</string>
+    <string name="action_ok">OK</string>
 
 </resources>
