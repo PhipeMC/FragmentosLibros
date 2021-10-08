@@ -15,8 +15,7 @@ import org.w3c.dom.Text;
 
 import java.util.Vector;
 
-public class MiAdaptadorPersonalizado
-        extends RecyclerView.Adapter<MiAdaptadorPersonalizado.ViewHolder> {
+public class MiAdaptadorPersonalizado extends RecyclerView.Adapter<MiAdaptadorPersonalizado.ViewHolder> {
 
 
     Vector<Libro> libros;

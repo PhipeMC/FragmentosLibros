@@ -131,7 +131,6 @@ public class SelectorFragment extends Fragment {
                             Intent intent = new Intent(Intent.ACTION_SEND);
                             intent.setType("text/plain");
                             intent.putExtra(Intent.EXTRA_SUBJECT, Libro.ejemplosLibros().elementAt(posLibro).getTitulo());
-
                             intent.putExtra(Intent.EXTRA_TEXT, Libro.ejemplosLibros().elementAt(posLibro).getUrl());
                             startActivity(intent);
 
@@ -141,17 +140,15 @@ public class SelectorFragment extends Fragment {
                             miAdaptadorPersonalizado.notifyItemInserted(Libro.ejemplosLibros().size() - 1);
                             Snackbar.make(view, R.string.insert_success, Snackbar.LENGTH_INDEFINITE).setAction(R.string.action_ok, new View.OnClickListener() {
                                 @Override
-                                public void onClick(View view) {
-
-                                }
+                                public void onClick(View view) { }
                             }).show();
-
                             break;
                         case 2:
                             Snackbar.make(view, R.string.delete_confirm, Snackbar.LENGTH_LONG).setAction(R.string.delete_action_yes, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Libro.ejemplosLibros().remove(posLibro);
+                                    //Libro.ejemplosLibros().remove(posLibro);
+                                    miAdaptadorPersonalizado.borrar(posLibro);
                                     miAdaptadorPersonalizado.notifyItemRemoved(posLibro);
                                 }
                             }).show();

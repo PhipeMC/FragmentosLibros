@@ -21,6 +21,7 @@ public class AdaptadorFiltro extends MiAdaptadorPersonalizado {
 
     public void setBusqueda(String busqueda) {
         this.busqueda = busqueda;
+        recalcularFiltro();
     }
 
     public void setGenero(String genero) {
@@ -48,8 +49,8 @@ public class AdaptadorFiltro extends MiAdaptadorPersonalizado {
                 indiceFiltro.add(i);
             }
         }
-        System.out.println(libros.size());
-        System.out.println(indiceFiltro.size());
+        //System.out.println(libros.size());
+        //System.out.println(indiceFiltro.size());
         super.libros = libros;
     }
 
